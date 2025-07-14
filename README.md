@@ -1,88 +1,154 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19935360&assignment_repo_type=AssignmentRepo)
-# Testing and Debugging MERN Applications
+Real-Time Chat Application
 
-This assignment focuses on implementing comprehensive testing strategies for a MERN stack application, including unit testing, integration testing, and end-to-end testing, along with debugging techniques.
+A full-stack, real-time chat application built with **Node.js**, **Express**, **Socket.io**, **React**, **MongoDB**, and **JWT authentication**. This app supports **global and private messaging**, **user registration/login**, **live online status**, **typing indicators**, and **room-based communication**.
 
-## Assignment Overview
+---
 
-You will:
-1. Set up testing environments for both client and server
-2. Write unit tests for React components and server functions
-3. Implement integration tests for API endpoints
-4. Create end-to-end tests for critical user flows
-5. Apply debugging techniques for common MERN stack issues
+## 📦 Project Structure
 
-## Project Structure
+socketio-chat/
+├── client/ # React front-end
+│ ├── public/
+│ ├── src/
+│ │ ├── api/ # Axios instance
+│ │ ├── components/ # Reusable UI components
+│ │ ├── context/ # React context providers
+│ │ ├── pages/ # Page-level components
+│ │ ├── socket/ # Socket.io client setup
+│ │ ├── App.jsx
+│ │ └── main.jsx
+│ └── vite.config.js
+│
+├── server/ # Node.js back-end
+│ ├── config/ # MongoDB & .env setup
+│ ├── controllers/ # Auth and socket handlers
+│ ├── middleware/ # JWT auth middleware
+│ ├── models/ # Mongoose models: User, Message, Room
+│ ├── routes/ # Express API routes
+│ ├── socket/ # Socket.io server logic
+│ ├── server.js # Main entry point
+│ └── .env
+│
+└── README.md # You're here
 
-```
-mern-testing/
-├── client/                 # React front-end
-│   ├── src/                # React source code
-│   │   ├── components/     # React components
-│   │   ├── tests/          # Client-side tests
-│   │   │   ├── unit/       # Unit tests
-│   │   │   └── integration/ # Integration tests
-│   │   └── App.jsx         # Main application component
-│   └── cypress/            # End-to-end tests
-├── server/                 # Express.js back-end
-│   ├── src/                # Server source code
-│   │   ├── controllers/    # Route controllers
-│   │   ├── models/         # Mongoose models
-│   │   ├── routes/         # API routes
-│   │   └── middleware/     # Custom middleware
-│   └── tests/              # Server-side tests
-│       ├── unit/           # Unit tests
-│       └── integration/    # Integration tests
-├── jest.config.js          # Jest configuration
-└── package.json            # Project dependencies
-```
+markdown
+Copy
+Edit
 
-## Getting Started
+---
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week6-Assignment.md` file
-4. Explore the starter code and existing tests
-5. Complete the tasks outlined in the assignment
+## 🚀 Features
 
-## Files Included
+### ✅ Core Features
+- ✅ JWT-based **authentication** (login/register)
+- ✅ **Public chatroom** support (default: `general`)
+- ✅ **Private messaging**
+- ✅ **Typing indicators**
+- ✅ **Online user list**
+- ✅ **Join/leave notifications**
+- ✅ Message **timestamps**
 
-- `Week6-Assignment.md`: Detailed assignment instructions
-- Starter code for a MERN application with basic test setup:
-  - Sample React components with test files
-  - Express routes with test files
-  - Jest and testing library configurations
-  - Example tests for reference
+### ✨ Advanced Features
+- ✅ **Socket.io authentication** via JWT
+- ✅ Room-based chat structure
+- ✅ Messages stored in **MongoDB**
+- ✅ Dynamic user list updates
+- ✅ Auto-reconnect with session persistence
 
-## Requirements
+---
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- npm or yarn
-- Basic understanding of testing concepts
+## 🛠️ Tech Stack
 
-## Testing Tools
+- **Frontend:** React + Tailwind CSS + Vite
+- **Backend:** Node.js + Express
+- **Realtime:** Socket.io
+- **Database:** MongoDB (via Mongoose)
+- **Authentication:** JWT (JSON Web Token)
+- **Proxying:** Vite Dev Server proxy to Express API
 
-- Jest: JavaScript testing framework
-- React Testing Library: Testing utilities for React
-- Supertest: HTTP assertions for API testing
-- Cypress/Playwright: End-to-end testing framework
-- MongoDB Memory Server: In-memory MongoDB for testing
+---
 
-## Submission
+## 📁 Setup Instructions
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+### Prerequisites
 
-1. Complete all required tests (unit, integration, and end-to-end)
-2. Achieve at least 70% code coverage for unit tests
-3. Document your testing strategy in the README.md
-4. Include screenshots of your test coverage reports
-5. Demonstrate debugging techniques in your code
+- Node.js ≥ 18
+- MongoDB running locally or via Atlas
 
-## Resources
+---
 
-- [Jest Documentation](https://jestjs.io/docs/getting-started)
-- [React Testing Library Documentation](https://testing-library.com/docs/react-testing-library/intro/)
-- [Supertest Documentation](https://github.com/visionmedia/supertest)
-- [Cypress Documentation](https://docs.cypress.io/)
-- [MongoDB Testing Best Practices](https://www.mongodb.com/blog/post/mongodb-testing-best-practices) 
+### 🔧 Environment Configuration
+
+#### `server/.env`
+
+```env
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/socketchat
+JWT_SECRET=your_jwt_secret
+CLIENT_URL=http://localhost:5173
+🖥 Backend Setup
+bash
+Copy
+Edit
+cd server
+npm install
+npm run dev
+💻 Frontend Setup
+bash
+Copy
+Edit
+cd client
+npm install
+npm run dev
+🔐 Authentication
+Register: /auth/register
+
+Login: /auth/login
+
+JWT is stored in localStorage and sent on every request via Axios interceptors.
+
+Socket.io handshakes include the JWT token in socket.auth.
+
+📡 Socket.io Events
+From Client → Server
+user_join
+
+send_message_to_room
+
+private_message
+
+typing
+
+join_room
+
+From Server → Client
+receive_message
+
+private_message
+
+user_joined, user_left
+
+typing_users
+
+user_list
+
+🧪 Example API Endpoints
+Method	Endpoint	Description
+GET	/api/users	List online users
+GET	/api/messages/:room	Fetch chat history
+POST	/api/auth/register	Register new user
+POST	/api/auth/login	Authenticate and get token
+
+📸 Screenshots
+(Add your own screenshots here if available)
+
+📱 Mobile Responsive?
+Yes. The frontend is responsive and tested across mobile and desktop layouts using Tailwind CSS.
+
+🔐 Security Notes
+JWT-based secure auth with expiry
+
+Protected routes using middleware
+
+Authenticated WebSocket connections
+
